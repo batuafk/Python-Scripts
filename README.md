@@ -9,7 +9,6 @@ def wait_internet_connection():
             time.sleep(20)
             pass
 
-
 print("Waiting for an internet connection...")
 wait_internet_connection()
 print("Internet connection established.")
