@@ -50,7 +50,7 @@ def terminate_process(process_name):
                 pass
 ```
 
-# Format time
+# Duration of a proccess
 ```python
 import time
 
@@ -82,4 +82,16 @@ end_time = time.time()
 elapsed_time = end_time - start_time
 
 print(f"Total duration: {format_duration(elapsed_time)}")
+```
+
+# Set console title
+```python
+def set_title(title):
+    if os.name == 'nt':
+        import ctypes
+        ctypes.windll.kernel32.SetConsoleTitleW(title)
+    else:
+        import sys
+        sys.stdout.write(f"\033]0;{title}\007")
+        sys.stdout.flush()
 ```
