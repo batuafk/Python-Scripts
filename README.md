@@ -1,17 +1,17 @@
 # Wait for internet connection
 ```python
-def wait_internet_connection():
+import socket
+import time
+def check_internet_connection():
+    print("Waiting for an internet connection...")
     while True:
         try:
             socket.create_connection(("8.8.8.8", 53), timeout=10)
+            print("Internet connection established.")
             return True
-        except OSError:
+        except:
             time.sleep(20)
-            pass
-
-print("Waiting for an internet connection...")
 wait_internet_connection()
-print("Internet connection established.")
 ```
 
 # Disable/enable task manager
