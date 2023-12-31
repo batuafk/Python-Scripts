@@ -49,3 +49,37 @@ def terminate_process(process_name):
             except psutil.NoSuchProcess:
                 pass
 ```
+
+# Format time
+```python
+import time
+
+def format_duration(seconds):
+    years, seconds = divmod(seconds, 31536000)
+    days, seconds = divmod(seconds, 86400)
+    hours, seconds = divmod(seconds, 3600)
+    minutes, seconds = divmod(seconds, 60)
+
+    result = ""
+    if years:
+        result += f"{int(years)}y "
+    if days:
+        result += f"{int(days)}d "
+    if hours:
+        result += f"{int(hours)}h "
+    if minutes:
+        result += f"{int(minutes)}m "
+    if seconds:
+        result += f"{int(seconds)}s"
+
+    return result
+
+start_time = time.time()
+
+# ...
+
+end_time = time.time()
+elapsed_time = end_time - start_time
+
+print(f"Total duration: {format_duration(elapsed_time)}")
+```
