@@ -74,7 +74,9 @@ def format_duration(seconds):
     return result
 
 start_time = time.time()
+
 # code
+
 end_time = time.time()
 elapsed_time = end_time - start_tim
 print(f"Total duration: {format_duration(elapsed_time)}")
