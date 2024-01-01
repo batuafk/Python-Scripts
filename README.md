@@ -99,3 +99,27 @@ def set_title(title):
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 ```
+
+# Fast open ports scan
+```python
+import threading
+import socket
+ip = 127.0.0.1
+timeout = 5  # 3=fast, 5=slow
+
+def scan_port(ip, port):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(1)
+
+    try:
+        sock.connect((ip, port))
+        print(f"\033[32m[+]\033[0m {ip}:{port}")
+    except socket.error:
+        pass
+    finally:
+        sock.close()
+
+for port in range(1, 65536):
+    thread = threading.Thread(target=scan_port, args=(ip, port))
+    thread.start()
+```
