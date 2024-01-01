@@ -2,7 +2,7 @@
 ```python
 import socket
 import time
-def check_internet_connection():
+def wait_internet_connection():
     print("Waiting for an internet connection...")
     while True:
         try:
@@ -11,7 +11,6 @@ def check_internet_connection():
             return True
         except:
             time.sleep(20)
-wait_internet_connection()
 ```
 
 # Enable/disable task manager
@@ -50,7 +49,7 @@ def terminate_process(process_name):
                 pass
 ```
 
-# Duration of a proccess
+# "The duration of a code."
 ```python
 import time
 
@@ -75,12 +74,9 @@ def format_duration(seconds):
     return result
 
 start_time = time.time()
-
-# ...
-
+# code
 end_time = time.time()
-elapsed_time = end_time - start_time
-
+elapsed_time = end_time - start_tim
 print(f"Total duration: {format_duration(elapsed_time)}")
 ```
 
@@ -94,4 +90,10 @@ def set_title(title):
         import sys
         sys.stdout.write(f"\033]0;{title}\007")
         sys.stdout.flush()
+```
+
+# Clear console
+```python
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 ```
