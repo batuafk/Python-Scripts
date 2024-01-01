@@ -119,7 +119,7 @@ def scan_port(ip, port):
     finally:
         sock.close()
 
-for port in range(1, 65536):
+for port in range(1, 65535):
     thread = threading.Thread(target=scan_port, args=(ip, port))
     thread.start()
 ```
