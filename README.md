@@ -85,8 +85,10 @@ def clear():
 ```python
 import threading
 import socket
+
 ip = 127.0.0.1
 timeout = 5  # 3=fast, 5=slow
+
 
 def scan_port(ip, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
