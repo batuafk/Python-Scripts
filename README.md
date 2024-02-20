@@ -49,7 +49,7 @@ def terminate_process(process_name):
                 pass
 ```
 
-# Duration of smth
+# Duration of a code
 ```python
 start_time = time.time()
 # code here
@@ -105,4 +105,36 @@ def scan_port(ip, port):
 for port in range(1, 65535):
     thread = threading.Thread(target=scan_port, args=(ip, port))
     thread.start()
+```
+
+```py
+from torswitch import TorProtocol
+import psutil
+
+def kill_tor():
+    tor_process_names = ["tor", "tor.exe"]
+    for proc in psutil.process_iter(['pid', 'name']):
+        if any(name.lower() in proc.info['name'].lower() for name in tor_process_names):
+            print(f"Found Tor process with PID: {proc.pid}")
+            try:
+                proc.kill()
+                print("Tor process terminated")
+            except psutil.AccessDenied:
+                print("Access denied")
+
+def run_tor():
+    global proxies
+
+    proxies = {
+        'http': "socks5://127.0.0.1:9050",
+        'https': "socks5://127.0.0.1:9050"
+    }
+    
+    kill_tor()
+
+    tor = TorProtocol()
+    tor.Start()
+    tor.NewTorIp()
+
+    print(tor.current_tor_ip)
 ```
