@@ -107,6 +107,7 @@ for port in range(1, 65535):
     thread.start()
 ```
 
+# Connect tor proxy
 ```py
 from torswitch import TorProtocol
 import psutil
