@@ -113,15 +113,13 @@ from torswitch import TorProtocol
 import psutil
 
 def kill_tor():
-    tor_process_names = ["tor", "tor.exe"]
-    for proc in psutil.process_iter(['pid', 'name']):
-        if any(name.lower() in proc.info['name'].lower() for name in tor_process_names):
-            print(f"Found Tor process with PID: {proc.pid}")
-            try:
-                proc.kill()
-                print("Tor process terminated")
-            except psutil.AccessDenied:
-                print("Access denied")
+    system = platform.system()
+    if system == 'Linux':
+        subprocess.run(['sudo', 'killall', 'tor'])
+    elif system == 'Windows':
+        subprocess.run(['taskkill', '/F', '/IM', 'tor.exe'])
+    else:
+        print("Unsupported operating system")
 
 def run_tor():
     global proxies
