@@ -86,7 +86,7 @@ def clear():
 import threading
 import socket
 
-ip = 127.0.0.1
+ip = "127.0.0.1"
 timeout = 5  # 3=fast, 5=slow
 
 
@@ -107,7 +107,7 @@ for port in range(1, 65535):
     thread.start()
 ```
 
-# Connect tor proxy
+# Connect tor proxy (use only port 9050)
 ```py
 from torswitch import TorProtocol
 import psutil
