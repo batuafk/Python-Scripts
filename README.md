@@ -107,33 +107,4 @@ for port in range(1, 65535):
     thread.start()
 ```
 
-# Connect tor proxy (use only port 9050)
-```py
-from torswitch import TorProtocol
-import psutil
-
-def kill_tor():
-    system = platform.system()
-    if system == 'Linux':
-        subprocess.run(['sudo', 'killall', 'tor'])
-    elif system == 'Windows':
-        subprocess.run(['taskkill', '/F', '/IM', 'tor.exe'])
-    else:
-        print("Unsupported operating system")
-
-def run_tor():
-    global proxies
-
-    proxies = {
-        'http': "socks5://127.0.0.1:9050",
-        'https': "socks5://127.0.0.1:9050"
-    }
-    
-    kill_tor()
-
-    tor = TorProtocol()
-    tor.Start()
-    tor.NewTorIp()
-
-    print(tor.current_tor_ip)
-```
+# TOR
