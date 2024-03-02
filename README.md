@@ -92,7 +92,7 @@ timeout = 5  # 3=fast, 5=slow
 
 def scan_port(ip, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(1)
+    sock.settimeout(timeout)
 
     try:
         sock.connect((ip, port))
