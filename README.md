@@ -106,5 +106,3 @@ for port in range(1, 65535):
     thread = threading.Thread(target=scan_port, args=(ip, port))
     thread.start()
 ```
-
-# TOR
