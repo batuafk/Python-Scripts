@@ -49,7 +49,7 @@ def terminate_process(process_name):
                 pass
 ```
 
-# Duration of a code (needs update)
+# Duration of a code
 ```python
 start_time = time.time()
 # code here
