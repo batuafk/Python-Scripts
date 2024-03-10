@@ -107,7 +107,7 @@ for port in range(1, 65535):
     thread.start()
 ```
 
-Tor SOCKS5 Proxies
+# Tor Proxies
 ```python
 class tor:
     def configure():
