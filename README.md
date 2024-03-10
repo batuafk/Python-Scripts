@@ -25,12 +25,12 @@ winreg.SetValueEx(key, value_name, 0, winreg.REG_DWORD, value_data)
 winreg.CloseKey(key)
 ```
 
-# Check if proccess exists
+# Check if proccess running
 ```python
 import psutil
-def check_process_exists(process_name):
-    for process in psutil.process_iter(attrs=['name']):
-        if process.info['name'] == process_name:
+def is_process_running(process_name):
+    for process in psutil.process_iter(["pid", "name"]):
+        if process.info["name"] == process_name:
             return True
     return False
 ```
@@ -39,9 +39,9 @@ def check_process_exists(process_name):
 ```python
 import psutil
 def terminate_process(process_name):
-    for process in psutil.process_iter(attrs=['pid', 'name']):
-        if process.info['name'] == process_name:
-            pid = process.info['pid']
+    for process in psutil.process_iter(attrs=["pid", "name"]):
+        if process.info["name"] == process_name:
+            pid = process.info["pid"]
             try:
                 p = psutil.Process(pid)
                 p.terminate()
@@ -105,4 +105,43 @@ def scan_port(ip, port):
 for port in range(1, 65535):
     thread = threading.Thread(target=scan_port, args=(ip, port))
     thread.start()
+```
+
+Tor SOCKS5 Proxies
+```python
+class tor:
+    def configure():
+        try:
+            path = "tor\\torrc"
+            ports = range(9000, 10000)
+
+            with open(path, "w") as torrc_file:
+                for port in ports:
+                    line = f"SocksPort {port}\n"
+                    torrc_file.write(line)
+            return True
+        except Exception as e:
+            return e
+
+    def start():
+        if is_process_running("tor.exe"):
+            terminate_process("tor.exe")
+            
+        if os.path.exists("tor\\torrc"):
+            os.system("start tor\\tor.exe -f tor\\torrc")
+        else:
+            os.system("start tor\\tor.exe")
+
+        time.sleep(5)
+
+    def stop():
+        os.system("taskkill /F /IM tor.exe")
+
+    def enable_system_wide(port):
+        os.system('reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings" /v ProxyEnable /t REG_DWORD /d 1 /f')
+        os.system(f'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings" /v ProxyServer /t REG_SZ /d "socks=127.0.0.1:{port}" /f')
+        os.system('reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings" /v ProxyOverride /t REG_SZ /d "<local>" /f')
+
+    def disable_system_wide():
+        os.system('reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings" /v ProxyEnable /t REG_DWORD /d 0 /f')
 ```
