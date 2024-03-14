@@ -51,16 +51,18 @@ def terminate_process(process_name):
 
 # Duration of a code
 ```python
+def duration():
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+
+    hours = int(elapsed_time // 3600)
+    minutes = int((elapsed_time % 3600) // 60)
+    seconds = int(elapsed_time % 60)
+
+    return f"[{hours:02d}:{minutes:02d}:{seconds:02d}]"
+
 start_time = time.time()
-# code here
-end_time = time.time()
-elapsed_time = end_time - start_time
-
-hours = int(elapsed_time // 3600)
-minutes = int((elapsed_time % 3600) // 60)
-seconds = int(elapsed_time % 60)
-
-formatted_time = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+print(f"[{duration()}] Hello, World!")
 ```
 
 # Set console title
