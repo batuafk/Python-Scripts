@@ -56,13 +56,13 @@ print(f"[{duration()}] Hello, World!")
 # Set console title
 ```python
 def set_title(title):
-    if os.name == 'nt':
-        import ctypes
-        ctypes.windll.kernel32.SetConsoleTitleW(title)
-    else:
-        import sys
-        sys.stdout.write(f"\033]0;{title}\007")
-        sys.stdout.flush()
+    try:
+        if os.name == "nt":
+            os.system(f"title {title}")
+        else:
+            os.system(f'echo -ne "\\033]0;{title}\\007"')
+    except Exception as e:
+        print(f"Error setting title: {e}")
 ```
 
 # Clear console
@@ -97,7 +97,7 @@ for port in range(1, 65535):
     thread.start()
 ```
 
-# Tor Proxies
+# Tor Proxies (needs update)
 ```python
 class tor:
     def configure():
