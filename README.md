@@ -65,6 +65,13 @@ def set_title(title):
         print(f"Error setting title: {e}")
 ```
 
+# Set console size
+```python
+def set_size(columns, lines):
+    command = f"mode con: cols={columns} lines={lines}"
+    os.system(command)
+```
+
 # Clear console
 ```python
 def clear():
